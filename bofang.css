@@ -1,0 +1,596 @@
+/* ===== 底部播放器 ===== */
+.mini-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #eef2f6;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.mini-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mini-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mini-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.mini-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-artist {
+    font-size: 13px;
+    color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-progress {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.mini-time {
+    font-size: 13px;
+    color: #64748b;
+    min-width: 40px;
+}
+
+.mini-progress-bar {
+    flex: 1;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.mini-progress-current {
+    height: 100%;
+    background: linear-gradient(90deg, #d14444, #f56565);
+    border-radius: 10px;
+    width: 0%;
+}
+
+.mini-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mini-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #e2e8f0;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mini-btn:hover {
+    background: #d14444;
+    color: white;
+}
+
+.mini-btn.play-pause-mini {
+    background: #d14444;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+/* ===== 遮罩层 ===== */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ===== 全屏播放器===== */
+.fullscreen-player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, #2C2C3A 0%, #1C1C25 100%);
+    z-index: 2000;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+}
+
+.fullscreen-player.active {
+    transform: translateY(0);
+}
+
+.fullscreen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    position: sticky;
+    top: 0;
+    background: #2A2A38;
+    /* backdrop-filter: blur(10px); */
+    z-index: 10;
+}
+
+.fullscreen-back {
+    font-size: 24px;
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 30%;
+    transition: all 0.2s;
+}
+
+.fullscreen-back:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.fullscreen-title {
+    font-size: 15px;
+    font-weight: 200;
+    color: #757579;
+}
+
+.fullscreen-title:hover {
+    color: #ffffff;
+}
+
+.fullscreen-share {
+    font-size: 15px;
+    color: #757579;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.fullscreen-share:hover {
+    color: #ffffff;
+}
+
+/* 详情页内容 */
+.detail-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 30px 80px;
+    display: flex;
+    gap: 50px;
+}
+
+/* 左侧封面区 */
+.detail-left {
+    width: 45%;
+    flex-shrink: 0;
+}
+
+.detail-cover {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin-top: 150px;
+    overflow: hidden;
+    box-shadow: 0 20px 30px -10px rgba(209, 68, 68, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 右侧信息区 */
+.detail-right {
+    flex: 1;
+}
+
+/* 歌曲标题 */
+.detail-song-title {
+    font-size: 35px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+/* 专辑/歌手/来源 */
+.detail-meta {
+    font-size: 16px;
+    color: #b0b0b0;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+
+/* 标签导航 */
+.detail-tabs {
+    display: flex;
+    gap: 5px;
+    /* border-bottom: 1px solid #333333; */
+    margin-bottom: 25px;
+}
+
+.detail-tab {
+    font-size: 16px;
+    font-weight: 400;
+    /* background-color: #404048; */
+    color: #a0a0a0;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.detail-tab.active {
+    color: #ffffff;
+}
+
+.detail-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+/* 歌词区域 */
+.lyrics-section {
+    margin-bottom: 30px;
+}
+
+.lyrics-content {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 20px;
+
+
+    /* 滚动条 */
+    scrollbar-width: thin;
+    scrollbar-color: #626267 #21212C;
+}
+
+.lyric-line {
+    padding: 8px 0;
+    font-size: 20px;
+    color: #626267;
+    line-height: 1.8;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.lyric-line:hover {
+    color: #B8B8C2;
+    transform: translateX(5px);
+}
+
+.lyric-line.active {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+
+
+/* 歌词 */
+.fullscreen-lyric-line {
+    padding: 8px 0;
+    font-size: 16px;
+    color: #626267;
+    line-height: 1.8;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.fullscreen-lyric-line:hover {
+    color: #B8B8C2;
+    transform: translateX(5px);
+}
+
+.fullscreen-lyric-line.active {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+/* 滚动条 */
+.lyrics-content::-webkit-scrollbar {
+    width: 6px;
+    /* 滚动条宽度 */
+}
+
+.lyrics-content::-webkit-scrollbar-track {
+    background: #21212C;
+    /* 轨道背景色 */
+    border-radius: 10px;
+}
+
+.lyrics-content::-webkit-scrollbar-thumb {
+    background: #626267;
+    /* 滑块颜色 */
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.lyrics-content::-webkit-scrollbar-thumb:hover {
+    background: #B8B8C2;
+    /* 滑块悬停颜色 */
+}
+
+
+/* 播放控制条 */
+.fullscreen-controls {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(28, 28, 37, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #33333d;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 150px;
+}
+
+.controls-progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.controls-time {
+    font-size: 14px;
+    color: #b0b0b0;
+    min-width: 45px;
+}
+
+.controls-bar {
+    flex: 1;
+    height: 6px;
+    background: #33333d;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.controls-current {
+    height: 100%;
+    background: linear-gradient(90deg, #d14444, #f56565);
+    border-radius: 10px;
+    width: 30%;
+    position: relative;
+}
+
+.controls-current::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: -4px;
+    width: 14px;
+    height: 14px;
+    background: #d14444;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.controls-bar:hover .controls-current::after {
+    opacity: 1;
+}
+
+.controls-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.controls-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #252530;
+    border: 1px solid #33333d;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controls-btn:hover {
+    background: #d14444;
+    color: white;
+}
+
+.controls-btn.play-pause-controls {
+    width: 50px;
+    height: 50px;
+    background: #d14444;
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+
+/* 音量控制 */
+.mini-volume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.volume-slider {
+    width: 60px;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.volume-current {
+    height: 100%;
+    background: #d14444;
+    border-radius: 10px;
+    width: 70%;
+}
+
+
+/* 全屏播放器-音量控制 */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.volume-slider-container {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    background: #252530;
+    border-radius: 20px;
+    padding: 0;
+}
+
+.volume-control:hover .volume-slider-container {
+    width: 80px;
+    padding: 0 8px;
+}
+
+.volume-slider-bar {
+    width: 100%;
+    height: 4px;
+    background: #33333d;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    margin: 8px 0;
+}
+
+.volume-slider-current {
+    height: 100%;
+    background: #d14444;
+    border-radius: 10px;
+    width: 70%;
+    position: relative;
+}
+
+.volume-slider-current::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: -4px;
+    width: 12px;
+    height: 12px;
+    background: #d14444;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.volume-slider-bar:hover .volume-slider-current::after {
+    opacity: 1;
+}
+
+/* 音量按钮样式 */
+#fullscreenVolumeBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #252530;
+    border: 1px solid #33333d;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fullscreenVolumeBtn:hover {
+    background: #d14444;
+    color: white;
+}
+
+
+#miniVolumeIcon {
+    font-size: 16px;
+    color: #4a5568;
+    cursor: pointer;
+}
+
+#miniVolumeIcon:hover {
+    color: #d14444;
+}
+
+
+/* 内容区域模糊效果 */
+#contentArea {
+    transition: filter 0.3s ease;
+}
+
+/* 修复全屏播放器封面ID */
+#fullscreenCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

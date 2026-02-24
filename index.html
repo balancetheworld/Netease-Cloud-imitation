@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易云音乐</title>
+    <!-- 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./iconfont.css">
+
+
+    <link rel="stylesheet" href="style.css" id="light-theme-css">
+    <link rel="stylesheet" href="bofang.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- 侧边栏  -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <i class="iconfont icon-wangyiyun-copy"></i>
+            <div class="logo-text">网易云音乐 </div>
+        </div>
+        <div class="primary-nav">
+            <a class="nav-item "><i class="iconfont icon-fangjian"></i><span>推荐</span></a>
+            <a class="nav-item active"><i class="iconfont icon-wenjianjia-yinle-tianchong"></i><span>精选</span></a>
+            <a class="nav-item"><i class="iconfont icon-boke1"></i><span>播客</span>
+                <span class="nav-badge">0</span>
+            </a>
+            <a class="nav-item"><i class="iconfont icon-tubiao-"></i><span>漫游</span></a>
+            <a class="nav-item"><i class="iconfont icon-xiaoxi"></i><span>关注</span></a>
+        </div>
+        <div class="primary-nav secondary">
+            <div class="wode">我的</div>
+            <a class="nav-item "><i class="iconfont icon-wenjianjia-yinle-tianchong"></i><span>我喜欢的音乐</span>
+                <span class="nav-badge">0</span>
+            </a>
+            <a class="nav-item"><i class="iconfont icon-boke1"></i><span>最近播放</span></a>
+            <a class="nav-item"><i class="iconfont icon-tubiao-"></i><span>我的播客</span></a>
+
+            <!-- 更多按钮（点击展开/收起） -->
+            <div class="nav-item more-toggle" id="moreToggle">
+                <i class="iconfont icon-xiangxia more-arrow" id="moreArrow"></i>
+                <span>更多</span>
+            </div>
+
+            <!-- 隐藏的额外菜单项（初始隐藏） -->
+            <div class="more-items" id="moreItems" style="display: none;">
+                <a class="nav-item"><i class="iconfont icon-shoucang-yishoucang"></i><span>我的收藏</span></a>
+                <a class="nav-item"><i class="iconfont icon-xiazai1"></i><span>下载管理</span></a>
+                <a class="nav-item"><i class="iconfont icon-wenjianjia-yinle-tianchong"></i><span>本地音乐</span></a>
+                <a class="nav-item"><i class="iconfont icon-yunshangchuan"></i><span>我的音乐网盘</span></a>
+
+                <!-- 收起按钮（点击收起） -->
+                <div class="nav-item collapse-toggle" id="collapseToggle">
+                    <i class="iconfont icon-xiangshang"></i>
+                    <span>收起</span>
+                </div>
+            </div>
+        </div>
+        <div class="playlist-header">
+            <span>创建的歌单 <span style="color: #8f9eb5;">0</span></span>
+            <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="spacer"></div>
+    </div>
+
+    <!-- 右侧主内容  -->
+    <div class="main-content">
+        <!-- 头部 -->
+        <div class="top-bar">
+            <!-- 左侧 -->
+            <div class="left-search-section">
+                <i class="fas fa-chevron-left back-icon" id="backBtn"></i>
+
+                <div class="search-container">
+                    <!-- 搜索框 -->
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="搜索音乐、歌手、歌词"
+                            autocomplete="off">
+                        <i class="fas fa-times clear-btn" id="clearBtn"></i>
+                    </div>
+
+                    <!-- 猜你喜欢面板 -->
+                    <div class="suggestions-panel" id="suggestionsPanel">
+                        <div class="panel-header">
+                            猜你喜欢
+                        </div>
+
+                        <!-- 行优先容器 -->
+                        <div class="suggestions-row" id="suggestionsRow">
+                            <div class="row-item" data-value="Poppin'Party">
+                                <span class="row-text">Poppin'Party</span>
+                            </div>
+
+                            <div class="row-item" data-value="RAISE A SUILEN">
+                                <span class="row-text">RAISE A SUI...</span>
+                            </div>
+
+                            <div class="row-item" data-value="精卫">
+                                <span class="row-text">精卫</span>
+                            </div>
+
+                            <div class="row-item" data-value="红色高跟鞋">
+                                <span class="row-text">红色高跟鞋</span>
+                            </div>
+
+                            <div class="row-item" data-value="张杰">
+                                <span class="row-text">张杰</span>
+                            </div>
+
+                            <div class="row-item" data-value="林俊杰">
+                                <span class="row-text">林俊杰</span>
+                            </div>
+
+                            <div class="row-item" data-value="苦茶子">
+                                <span class="row-text">苦茶子</span>
+                            </div>
+
+                            <div class="row-item" data-value="方大同">
+                                <span class="row-text">方大同</span>
+                            </div>
+
+                            <div class="row-item" data-value="郑润泽">
+                                <span class="row-text">郑润泽</span>
+                            </div>
+
+                            <div class="row-item" data-value="HELL! or HELL">
+                                <span class="row-text">HELL! or HEL...</span>
+                            </div>
+
+                            <div class="row-item" data-value="恋人">
+                                <span class="row-text">恋人</span>
+                            </div>
+
+                            <div class="row-item" data-value="沉沦与遐想">
+                                <span class="row-text">沉沦与遐想</span>
+                            </div>
+
+                            <div class="row-item" data-value="唯一">
+                                <span class="row-text">唯一</span>
+                            </div>
+
+                            <div class="row-item" data-value="想你的夜">
+                                <span class="row-text">想你的夜</span>
+                            </div>
+
+                            <div class="row-item" data-value="把回忆拼好给你">
+                                <span class="row-text">把回忆拼好给...</span>
+                            </div>
+                        </div>
+
+                        <!-- 查看更多 -->
+                        <div class="view-more" id="viewMore">
+                            <span>查看更多推荐</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <i class="fas fa-microphone microphone-icon back-icon" id="backBtn"></i>
+            </div>
+
+            <!-- 右侧-用户信息 + 更多 -->
+            <div class="right-section">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="username">茶言123</span>
+                    <span class="vip-badge">VIP</span>
+                </div>
+                <i class="fas fa-ellipsis-v more-icon" id="moreBtn"></i>
+            </div>
+        </div>
+
+
+        <div class="content-pane">
+            <!-- 精选标签行 -->
+            <div class="chip-row">
+                <span class="chip highlight" id="chipJingxuan">精选</span> <!-- 恢复 id -->
+                <span class="chip" id="chipGedan">歌单广场</span> <!-- 恢复 id -->
+                <span class="chip">排行榜</span>
+                <span class="chip">歌手</span>
+                <span class="chip">VIP</span>
+            </div>
+
+            <!-- 动态内容容器 - 恢复这个 -->
+            <div id="dynamicContent">
+                <!-- 精选内容 -->
+                <div id="jingxuanContent"> <!-- 恢复 id -->
+                    <!-- 轮播歌单 -->
+                    <div class="section-header">
+                        <h3>官方歌单 <i class="fas fa-chevron-right" style="font-size: 10px;"></i> </h3>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev-btn" id="playlistPrev"><i
+                                    class="fas fa-chevron-left"></i></button>
+                            <button class="carousel-btn next-btn" id="playlistNext"><i
+                                    class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- 歌单轮播 -->
+                    <div class="playlist-carousel-container">
+                        <div class="playlist-carousel" id="playlistCarousel">
+                            <!-- JS动态加载 -->
+                        </div>
+                        <div class="carousel-dots" id="playlistDots">
+                            <!-- JS动态加载 -->
+                        </div>
+                    </div>
+
+                    <!-- 最新音乐 -->
+                    <div class="section-header">
+                        <h3>最新音乐 <i class="fas fa-chevron-right"
+                                style="font-size: 16px; margin-left: 8px; color: #a0b3cc;"></i>
+                        </h3>
+                        <a href="#">更多新歌</a>
+                    </div>
+                    <div class="music-row" id="latestMusicRow">
+                        <!-- JS动态加载 -->
+                    </div>
+
+                    <!-- 精选有声书 -->
+                    <div class="section-header">
+                        <h3>精选有声书 <i class="fas fa-chevron-right"
+                                style="font-size: 16px; margin-left: 8px; color: #a0b3cc;"></i></h3>
+                        <a href="#">更多新歌</a>
+                    </div>
+                    <div class="music-row" id="audioBookRow">
+                        <!-- JS动态加载 -->
+                    </div>
+                </div>
+
+                <!-- 歌单广场内容 - 恢复这个 -->
+                <div id="gedanContent" style="display: none;"> <!-- 恢复 id 和 style -->
+                    <div class="section-header">
+                        <h3>热门歌单 <i class="fas fa-chevron-right" style="font-size: 10px;"></i></h3>
+                    </div>
+
+                    <!-- 筛选标签 -->
+                    <div class="filter-row">
+                        <span class="filter-chip active">全部</span>
+                        <span class="filter-chip">华语</span>
+                        <span class="filter-chip">欧美</span>
+                        <span class="filter-chip">日韩</span>
+                        <span class="filter-chip">流行</span>
+                        <span class="filter-chip">摇滚</span>
+                        <span class="filter-chip">民谣</span>
+                        <span class="filter-chip">电子</span>
+                    </div>
+
+                    <!-- 歌单网格 -->
+                    <div class="card-grid" id="gedanGrid"> <!-- 恢复 id -->
+                        <div class="loading-tip">加载歌单中...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 底部迷你播放器 -->
+    <div class="mini-player" id="miniPlayer">
+        <div class="mini-cover">
+            <img src="https://picsum.photos/48/48?random=1" alt="封面" id="miniCover">
+        </div>
+        <div class="mini-info">
+            <div class="mini-title" id="miniTitle">锁（R&B版）</div>
+            <div class="mini-artist" id="miniArtist">呆小帅</div>
+        </div>
+
+        <div class="mini-progress">
+            <span class="mini-time" id="miniCurrentTime">0:00</span>
+            <div class="mini-progress-bar" id="miniProgressBar">
+                <div class="mini-progress-current" id="miniProgressCurrent" style="width: 30%;"></div>
+            </div>
+            <span class="mini-time" id="miniTotalTime">3:45</span>
+        </div>
+
+        <div class="mini-controls">
+            <button class="mini-btn" id="miniPrevBtn"><i class="fas fa-step-backward"></i></button>
+            <button class="mini-btn play-pause-mini" id="miniPlayPauseBtn"><i class="fas fa-pause"
+                    id="miniPlayIcon"></i></button>
+            <button class="mini-btn" id="miniNextBtn"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <!-- 音量控制 -->
+        <div class="mini-volume" style="display: none;">
+            <i class="fas fa-volume-up" id="miniVolumeIcon"></i>
+            <div class="volume-slider" id="miniVolumeSlider">
+                <div class="volume-current" id="miniVolumeCurrent" style="width: 70%;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 遮罩层 -->
+    <div class="overlay" id="overlay"></div>
+    <!-- 全屏详情页 -->
+    <div class="fullscreen-player" id="fullscreenPlayer">
+        <div class="fullscreen-header">
+            <i class="fas fa-arrow-left fullscreen-back" id="fullscreenBack"></i>
+            <span class="fullscreen-title ">播放器模式
+                <i class="fas fa-share-alt fullscreen-share"></i>
+            </span>
+        </div>
+
+        <div class="detail-content">
+            <!-- 左侧封面区 -->
+            <div class="detail-left">
+                <div class="detail-cover">
+                    <img src="https://picsum.photos/340/340?random=1" alt="专辑封面" id="detailCover">
+                </div>
+            </div>
+
+            <!-- 右侧信息区 -->
+            <div class="detail-right">
+                <!-- 歌曲标题 -->
+                <div class="detail-song-title" id="detailTitle">锁（R&B版）</div>
+
+
+                <div class="detail-meta" id="fullscreenMeta">
+                    专辑：<span id="fullscreenAlbum">锁（R&B版）</span> 歌手：<span id="fullscreenArtist">呆小帅</span>
+                    来源：<span>云音乐精选</span>
+                </div>
+
+                <!-- 标签导航 -->
+                <div class="detail-tabs">
+                    <div class="detail-tab active">歌词</div>
+                    <div class="detail-tab">百科</div>
+                    <div class="detail-tab">相似推荐</div>
+                </div>
+
+                <!-- 歌词区域 -->
+                <div class="lyrics-section">
+                    <div class="lyrics-content" id="fullscreenLyricsContainer">
+                        <!-- 歌词将通过JS动态生成 -->
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!-- 底部播放控制条 -->
+        <div class="fullscreen-controls">
+            <div class="controls-progress">
+                <span class="controls-time" id="fullscreenCurrentTime">1:15</span>
+                <div class="controls-bar fullscreen-progress-bar" id="fullscreenProgressBar">
+                    <div class="controls-current fullscreen-progress-current" id="fullscreenProgressCurrent"
+                        style="width: 30%;"></div>
+                </div>
+                <span class="controls-time" id="fullscreenTotalTime">3:45</span>
+            </div>
+
+            <div class="controls-buttons">
+                <button class="controls-btn" id="fullscreenPrevBtn"><i class="fas fa-step-backward"></i></button>
+                <button class="controls-btn play-pause-controls" id="fullscreenPlayPauseBtn"><i class="fas fa-pause"
+                        id="fullscreenPlayIcon"></i></button>
+                <button class="controls-btn" id="fullscreenNextBtn"><i class="fas fa-step-forward"></i></button>
+
+                <button class="controls-btn"><i class="fas fa-volume-up"></i></button>
+                <button class="controls-btn"><i class="fas fa-list"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="sidebar-more.js"></script>
+
+    <!-- 音频元素，不可见 -->
+    <audio id="audioPlayer" preload="metadata"></audio>
+</body>
+
+</html>
